@@ -34,7 +34,7 @@ Thực hiện: **Phạm Văn Đạt**
 
 **- Cấu trúc cơ bản**
  * Sơ đồ biểu hiện cấu trúc đơn giản của một ứng dụng Web và miêu tả vị trí của HTTP:
- <img src="">
+<img src="">
  * Giao thức HTTP là giao thức yêu cầu/phản hồi dự trên cấu trúc server/client, nơi mà các trình duyệt Web, các thiết bị tìm kiếm,... hoạt động như các client, và các server web hoạt động như server. 
  * **Client**: Gửi yêu cầu tới Server theo mẫu cảu một phương thức yêu cầu, ỦI, và phiên bản giao thức, được theo bởi một thông báo MIME chứa các bộ chỉnh sửa yêu cầu, thông tin Client và nội dung có thể qua một kết nối TCP/IP.
  * **Server**: Phản hồi vói một dòng trạng thái, bao gồm phiên bản giao thức của thông báo và môt code thành công hoặc lỗi, theo sau bởi mỗi thông báo MIME chứa thông tin server, thông tin thực thể đa phuong tiện và nội dung đối tượng có thể.
