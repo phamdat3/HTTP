@@ -40,22 +40,21 @@ Thực hiện: **Phạm Văn Đạt**
 <a name="2"></a>
 ## 2. HTTP - Các tham số
 
- **- Phiên bản HTTP**
-      - HTTP sử dụng một sơ đồ đánh số **<major>.<minor>** để chỉ phiên bản của giao thức. Phiên bản của một thông báo HTTP được chỉ bởi một trường HTTP-Version trong dòng đầu tiên. Tại đây là cú pháp chung của việc xác định số phiên bản HTTP:
-
-      `HTTP-Version ="HTTP" "/" 1*DIGIT "." 1*DIGIT`
+ **- Phiên bản HTTP**  
+      - HTTP sử dụng một sơ đồ đánh số **<major>.<minor>** để chỉ phiên bản của giao thức. Phiên bản của một thông báo HTTP được chỉ bởi một trường HTTP-Version trong dòng đầu tiên. Tại đây là cú pháp chung của việc xác định số phiên bản HTTP:  
+`HTTP-Version ="HTTP" "/" 1*DIGIT "." 1*DIGIT`
 
       ví dụ:
-      ```
+```
       HTTP/1.0
       or
       HTTP/1.1
-      ```
+```
 
- **- Uniform Resource Identifiers - Bộ nhận diện nguồn tài nguyên đồng nhất** 
+ **- Uniform Resource Identifiers - Bộ nhận diện nguồn tài nguyên đồng nhất**   
       - URI là một định dạng tài nguyên thống nhất (URI, viết tắt từ Uniform Resource Identifier) là một chuỗi ký tự được sử dụng để xác định, nhận dạng một tên hoặc một tài nguyên. Việc xác định như vậy cho phép tương tác với các thể hiện tài nguyên trên mạng (thường là World Wide Web) sử dụng các giao thức cụ thể.
-      - Ví dụ:
-      ` URI="http:" "//" host [ ":" port ] [abs_path ["?" query]] `
+      - Ví dụ:  
+     ` URI="http:" "//" host [ ":" port ] [abs_path ["?" query]] `
       - Với: + **port** để trống thì tự hiểu là port 80
              + **abs_path** tương đương vs 1 "/".
              + **reserved** và **unsafe** tương đương với mã hóa "%" "HEX HEX" tương ứng.
@@ -66,7 +65,7 @@ Thực hiện: **Phạm Văn Đạt**
       http://ABC.com:/%7esmith/home.html
       ```
 
- **- Các định dạng Ngày/Thời gian**
+ **- Các định dạng Ngày/Thời gian**  
       - Tất cả các nhãn Ngày/Thời gian HTTP Phải được biểu diễn trong Greenwich Mean Time (GMT), không có sự ngoại trừ. Các ứng dụng HTTP được cho phép để sử dụng 3 nhãn đại diện Ngày/Thời gian sau:
       ```
       Sun, 06 Nov 1994 08:49:37 GMT  ; RFC 822, updated by RFC 1123
@@ -74,7 +73,7 @@ Thực hiện: **Phạm Văn Đạt**
       Sun Nov  6 08:49:37 1994       ; ANSI C's asctime() format
       ```
 
- **- Các bộ ký tự**
+ **- Các bộ ký tự**   
       - Chúng ta sử dụng các bộ ký tự để xác định các thiết lập ký tự mà Client ưa thích. Nhiều bộ thiết lập ký tự có thể được liệt kê riêng biệt bởi các dấu phảy. Nếu một giá trị là không được xác định, mặc định là US-ASII.
       - Ví dụ:
       ```
@@ -89,7 +88,7 @@ Thực hiện: **Phạm Văn Đạt**
       ISO-8859-7
       ```
 
- **- Mã hóa nội dung**
+ **- Mã hóa nội dung**   
       - Là một thuật toán mã hóa đã được sử dụng để mã hóa nooin dung trước khi nó được truyền đi. Mã háo nội dung được dùng để nén dữ liệu để cho thông tin được nhẹ hơn và chuyền tải giễ dàng hơn hoặc làm cho thông tin hoàn thiện và đảm bảo hơn trước khi truyền đi mà không bị thất lạc nhận diện.
       - Tất cả các giá trị mã hóa nội dung là không phân biệt kiểu chữ (case-insensitive). HTTP/1.1 sử dụng các giá trị mã hóa nội dung trong các trường Accept-Encoding và Content-Encoding Header mà chúng ta sẽ quan sát trong các chương kế tiếp.
       - Ví dụ: sơ đồ mã hóa hợp lệ
@@ -105,7 +104,7 @@ Thực hiện: **Phạm Văn Đạt**
       Accept-encoding: deflate
       ```
 
- **- Các kiểu đa phương tiện (media types)**
+ **- Các kiểu đa phương tiện (media types)**   
       - HTTP sử dụng các Kiểu phương tiện Internet trong các trường **Content-Type** và **Accept** để cung cấp dữ liệu mở và có thể mở rộng. Tất cả các giá trị kiểu phương tiện được đăng ký với IANA (Internet Assigned Number Authority). Cú pháp chung để xác định kiểu phương tiện như sau:
       ```
       media-type     = type "/" subtype *( ";" parameter )
@@ -113,7 +112,7 @@ Thực hiện: **Phạm Văn Đạt**
       Các thuộc tính type, subtype và parameter là case-insentive 
       Ví dụ:
       `Accept: image/gif`
- **- Các thẻ ngôn ngữ**
+ **- Các thẻ ngôn ngữ**   
       - HTTP sử dụng các thẻ ngôn ngữ trong các trường Accept-Language và Content-Language. Một thẻ ngôn ngữ bao gồm một hoặc nhiều phần: Một thẻ ngôn ngữ sơ cấp và một dãy các thẻ phụ:
       `language-tag  = primary-tag *( "-" subtag )` Các khoảng trắng không được cho phép trong thẻ và tất cả các thẻ là case-insentive.
       - Ví dụ: Các thẻ ví dụ bao gồm:
