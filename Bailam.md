@@ -28,11 +28,11 @@ Thực hiện: **Phạm Văn Đạt**
 
 **Các đặc trưng cơ bản**
  - Có 3 đặc trưng cơ bản:
-  + **HTTP là giao thức connectionless(kết nối không liên tục)**: Client của HTTP. Là Client tạo 1 yêu cầu HTTP gửi tới Server và ngắt kết nối từ Client tới Server và đợi cho 1 phản hồi, sau đó Server sử lý yeu caaif và gưi lại phản hồi cho Client.
-  + **HTTP là một phuong tiện đọc lập**: Bất kỳ dữ liệu nào cũng có thẻ gửi được bởi HTTP miễn alf Server và Client biết cách kiểm soát được nội dung dữ liệu. Yêu cầu Server và Client sử dụng kiểu MIME thích hợp để xác dịnhđược kiểu nội dung.
-  + **HTTP là stateless**: HTTP là connectionless nên kết quả là HTTP trở thành một giao thức Stateless. Server và Client chỉ biết nhau tại thời điểm có yêu cầu hiện tại, sau đó cả hai sẽ quên nau luôn. Do bản chất của giao thức, cả Client và các trình duyệt có thể giữ lại thông tin giữa các yêu cầu khác nhau giữa các trang web.
- **- Cấu trúc cơ bản**
-  - Sơ đồ biểu hiện cấu trúc đơn giản của một ứng dụng Web và miêu tả vị trí của HTTP:
+   + **HTTP là giao thức connectionless(kết nối không liên tục)**: Client của HTTP. Là Client tạo 1 yêu cầu HTTP gửi tới Server và ngắt kết nối từ Client tới Server và đợi cho 1 phản hồi, sau đó Server sử lý yeu caaif và gưi lại phản hồi cho Client.
+   + **HTTP là một phuong tiện đọc lập**: Bất kỳ dữ liệu nào cũng có thẻ gửi được bởi HTTP miễn alf Server và Client biết cách kiểm soát được nội dung dữ liệu. Yêu cầu Server và Client sử dụng kiểu MIME thích hợp để xác dịnhđược kiểu nội dung.
+   + **HTTP là stateless**: HTTP là connectionless nên kết quả là HTTP trở thành một giao thức Stateless. Server và Client chỉ biết nhau tại thời điểm có yêu cầu hiện tại, sau đó cả hai sẽ quên nau luôn. Do bản chất của giao thức, cả Client và các trình duyệt có thể giữ lại thông tin giữa các yêu cầu khác nhau giữa các trang web.
+**- Cấu trúc cơ bản**
+ - Sơ đồ biểu hiện cấu trúc đơn giản của một ứng dụng Web và miêu tả vị trí của HTTP:
 <img src="">
  - Giao thức HTTP là gioa thức yêu cầu/phản hồi dự trên cấu trúc server/client, nơi mà các trình duyệt Web, các thiết bị tìm kiếm,... hoạt động như các client, và các server web hoạt động như server. 
  - **Client**: Gửi yêu cầu tới Server theo mẫu cảu một phương thức yêu cầu, ỦI, và phiên bản giao thức, được theo bởi một thông báo MIME chứa các bộ chỉnh sửa yêu cầu, thông tin Client và nội dung có thể qua một kết nối TCP/IP.
