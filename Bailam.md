@@ -41,10 +41,10 @@ Thực hiện: **Phạm Văn Đạt**
 ## 2. HTTP - Các tham số
 
  **- Phiên bản HTTP**  
-      - HTTP sử dụng một sơ đồ đánh số **<major>.<minor>** để chỉ phiên bản của giao thức. Phiên bản của một thông báo HTTP được chỉ bởi một trường HTTP-Version trong dòng đầu tiên. Tại đây là cú pháp chung của việc xác định số phiên bản HTTP:  
+      + HTTP sử dụng một sơ đồ đánh số **<major>.<minor>** để chỉ phiên bản của giao thức. Phiên bản của một thông báo HTTP được chỉ bởi một trường HTTP-Version trong dòng đầu tiên. Tại đây là cú pháp chung của việc xác định số phiên bản HTTP:  
 `HTTP-Version ="HTTP" "/" 1*DIGIT "." 1*DIGIT`
 
-      ví dụ:
+ví dụ:
 ```
       HTTP/1.0
       or
