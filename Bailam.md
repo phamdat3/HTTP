@@ -677,7 +677,47 @@ ví dụ:
 
 <a name="8"></a>
 ## 8. HTTP - Các trường Header
+* Các trường Header cung cấp thông tin được yêu cầu về yêu cầu hoặc phản hồi, hoặc về đối tượng được gửi trong phần thân thông báo. Có 4 kiểu của trường Header thông báo HTTP:
 
+### General Header (kiểu chung)
+* Các trường Header này có khả năng ứng dụng chung cho cả các thông báo yêu cầu và phản hồi
+**Trường Cache-Control**
+ * Trường Header chung **Cache-Control** được sử dụng để xác định các chỉ dẫn mà PHẢI được tuân theo bởi tất cả các hệ thống bộ nhớ ẩn. Cú pháp như sau:
+```
+ Cache-Control : cache-request-directive|cache-response-directive
+```
+ * Một Client hoặc Server có thể sử dụng Header chung Cache-Control để xác định các tham số cho bộ nhớ ẩn hoặc yêu cầu các loại cụ thể của tài liệu từ bộ nhớ ẩn.
+ * ví dụ:
+```
+ Cache-control: no-cache
+```
+* Một số chỉ dẫn yêu cầu bộ nhớ ẩn quan trong mà có thể sử dụng bởi **client** trong yêu cầu HTTP:
+
+|STT| Chỉ dẫn yêu cầu bộ nhớ ẩn và miêu tả |
+|---|--------------------------------------|
+|1|**no-cache**: Một bộ nhứ ẩn phải không sử dụng phản hồi để làm thỏa mãn một yêu cầu theo sau mà khồng tái sác nhận thành công với Server ban đầu|
+|2|**no-store**: Bộ nhớ ẩn không nên lưu dữ bất cứ thứ gì về yêu cầu Client hoặc phản hồi 
+Server|
+|3|**max-age = giây (s)**: Chỉ ra rằng Client đang muốn chấp nhận một mà thời gian của nó không lớn hơn thời gian đã sác định bằng giây|
+|4|**max-stale [ tính bằng giây ]**: Chỉ ra rằng Client đang muốn chấp nhận một phản hồi mà đã vượt thời gian mãn hạn. Nếu số giây được cung cấp, nó phải không là hết hạn bởi nhiều hơn thời gian đó|
+|5|**min-fresh = giây**: Chỉ ra răng Client đang muốn chấp nhận một phản hồi mà thời gian sống khỏe của nó là không ít hơn tuổi hiện tại của nó cộng lại với thời gian sác định bằng giây|
+|6|**no-transform**: Không chuyển đổi phân thân đối tượng|
+|7|**only-if-cached**: Không lấy dữ liệu mới. Bộ nhớ ẩn có thể gửi một tài liệu chỉ kho nó ở trong bộ nhớ ẩn, và không nên liên hệ với server ban đầu để xem xét nấu một bản sao mới hơn tồn tại|
+
+* Các chỉ dẫn phản hồi bộ nhớ ẩn quan trọng sau đây có thể được sử dụng bởi **Server** trong phản hồi của nó:
+|STT| Chỉ dẫn yêu cầu bộ nhớ ẩn và miêu tả |
+|---|--------------------------------------|
+|1|**public**: Chỉ ra rằng phản hồi có thể được giữ trong bộ nhớ ẩn bởi bất cứ bộ nhớ ẩn nào|
+|2|**private**: Chỉ ra rằng tất cả hoặc một phần của thông báo phản hồi được xem như là cho một người sử dụng đơn và phải không được giữ trong bộ nhớ ẩn bởi một bộ nhớ ẩn được chia sẻ.|
+|3|**no-cache**: Một bộ nhớ ẩn phải không sử dụng phản hồi để thỏa mãn một yêu cầu theo sau mà không tái xác nhận thành công với Server ban đầu.|
+|4|**no-store**: Bộ nhớ ẩn không nên lưu bất cứ gì về yêu cầu Client hoặc phản hồi Server.|
+|5|**no-transform**: Không chuyển đổi phần thân đối tượng.|
+|6|**must-revalidate**: Bộ nhớ ẩn phải xác minh trạng thái của các tài liệu đã cũ trước khi sử dụng nó và các tài liệu đã mãn hạn không nên được sử dụng|
+|7|**proxy-revalidate**: Chỉ dẫn tái xác nhận ủy quyền có cùng ý nghĩa với chỉ dẫn must-revalidate, ngoại trừ nó không áp dụng tới các bộ nhớ ẩn user agent không được chia sẻ.|
+|8|**max-age = giây**: Chỉ ra rằng Client đang muốn chấp nhận một yêu cầu mà tuổi của nó không lớn hơn thời gian đã xác định bằng giây|
+|9|**s-maxage = giây**: Tuổi tối đa được xác định bởi chỉ dẫn này vượt quá tuổi tối đa đã xác định bởi hoặc chỉ dẫn max-age hoặc Expires Header. Chỉ dẫn s-maxage luôn luôn được bỏ qua bởi một bộ nhớ cá nhân.|
+
+**Trường Connection**
 <a name="9"></a>
 ## 9. HTTP - Caching
 
