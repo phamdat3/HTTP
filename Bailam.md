@@ -324,7 +324,7 @@ ví dụ:
 |1| **1xx: Thông tin**: Nó nghĩa là yêu cầu đã được nhận và tiến trình đang tiếp tục.|
 |2| **2xx: Thành công**: Nó nghĩa là hoạt động đã được nhận, được hiểu, và được chấp nhận một cách thành công.|
 |3| **3xx: Sự điều hướng lại**: Nó nghĩa là hoạt động phải được thực hiện để hoàn thành yêu cầu.|
-|4| **Lỗi Client**: Nó nghĩa là yêu cầu chứa cú pháp không chính xác hoặc không được thực hiện.|
+|4| **4XX: Lỗi Client**: Nó nghĩa là yêu cầu chứa cú pháp không chính xác hoặc không được thực hiện.|
 |5| **5xx: Lỗi Server**: Nó nghĩa là Server thất bại với việc thực hiện một yêu cầu nhìn như có vẻ khả thi.|
 * **Các trường Header Phản hồi**
  * Các trường Header phản hồi cho phép Server truyền thông tin thêm về phản hồi mà không thể được đặt trong dòng Status-Line. Những trường Header này cung cấp thông tin về Server và về truy cập từ xa tới nguồn được xác định bởi Request-URI.
@@ -432,7 +432,180 @@ ví dụ:
  </body>
  </html>
 ```
+* **Phương thức HEAD**
+ * Phương thức Head có chức năng tương tự Get, ngoại trừ là Server phản hồi với một dòng các Hearder phản hồi, nhưng không có phần thân dối tượng.
+ * Ví dụ: Cách sử dụng phương thức Head để chỉ thị thông tin Header về *hello.htm*.
+```
+ HEAD /hello.htm HTTP/1.1
+ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+ Host: www.tutorialspoint.com
+ Accept-Language: en-us
+ Accept-Encoding: gzip, deflate
+ Connection: Keep-Alive
+```
+ * Server phản hồi lại yêu cầu HEAD trên như sau:
+```
+ HTTP/1.1 200 OK
+ Date: Mon, 27 Jul 2009 12:28:53 GMT
+ Server: Apache/2.2.14 (Win32)
+ Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT
+ ETag: "34aa387-d-1568eb00"
+ Vary: Authorization,Accept
+ Accept-Ranges: bytes
+ Content-Length: 88
+ Content-Type: text/html
+ Connection: Closed
+```
 
+ *Bạn chú ý rằng tai đây Server không gửi bất cứ dữ liệu nào sau Header.*
+
+* **Phương thức POST**
+ * Được suwer dụng khi bạn gửi một vài dữ liệu tới Server, như cập nhập file, dữu liệu mẫu,...
+ * Ví dụ: Sử dụng phương thức POST để gửi một dữ liệu mẫu tới Server, mẫu đó được sử lý bởi một *process.cgi* và sễ được trả lại phản hồi.
+```
+ POST /cgi-bin/process.cgi HTTP/1.1
+ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+ Host: www.tutorialspoint.com
+ Content-Type: text/xml; charset=utf-8
+ Content-Length: 88
+ Accept-Language: en-us
+  Accept-Encoding: gzip, deflate
+ Connection: Keep-Alive
+```
+```
+ <?xml version="1.0" encoding="utf-8"?>
+ <string xmlns="http://clearforest.com/">string</string>
+```
+* Bên Server, scipt *process.cgi* xử lý dữ liệu đã truyền và gửi phản hồi như sau:
+```
+ HTTP/1.1 200 OK
+ Date: Mon, 27 Jul 2009 12:28:53 GMT
+ Server: Apache/2.2.14 (Win32)
+ Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT
+ ETag: "34aa387-d-1568eb00"
+ Vary: Authorization,Accept
+ Accept-Ranges: bytes
+ Content-Length: 88
+ Content-Type: text/html
+ Connection: Closed
+```
+```
+ <html>
+ <body>
+ <h1>Request Processed Successfully</h1>
+ </body>
+ </html>
+```
+* **Phương thức PUT**
+ * Sử dụng để yêu cầu Server lưu dữ phân thân dối tượng được bao gồm tại một vị trí được xác định bởi URL đã cung cấp.
+ * Ví dụ: Yêu cầu Server lưu phần thân đối tượng đã cấp trong *hello.htm* tại **root** của server.
+```
+ PUT /hello.htm HTTP/1.1
+ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+ Host: www.tutorialspoint.com
+ Accept-Language: en-us
+ Connection: Keep-Alive
+ Content-type: text/html
+ Content-Length: 182
+```
+```
+ <html>
+ <body>
+ <h1>Hello, World!</h1>
+ </body>
+ </html>
+```
+* Server sẽ lưu phần thân đối tượng trong tệp *hello.jsp* và sẽ gửi phản hồi sau trở lại Client:
+```
+ HTTP/1.1 201 Created
+ Date: Mon, 27 Jul 2009 12:28:53 GMT
+ Server: Apache/2.2.14 (Win32)
+ Content-type: text/html
+ Content-length: 30
+ Connection: Closed
+```
+```
+ <html>
+ <body>
+ <h1>The file was created.</h1>
+ </body>
+ </html>
+```  
+* **Phương thức DELETE**
+ * Dùng để yêu cầu Server xóa một file tại vị trí sác định bởi URL cung cấp. 
+ * Ví dụ: Xóa tệp tin *hello.htm* tại **root** của server.
+```
+ DELETE /hello.htm HTTP/1.1
+ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+ Host: www.tutorialspoint.com
+ Accept-Language: en-us
+ Connection: Keep-Alive
+```
+* Server sẽ xóa một tệp đã được đề cập và sẽ gửi phản hồi trở lại tới Client:
+```
+ HTTP/1.1 200 OK
+ Date: Mon, 27 Jul 2009 12:28:53 GMT
+ Server: Apache/2.2.14 (Win32)
+ Content-type: text/html
+ Content-length: 30
+ Connection: Closed
+```
+```
+ <html>
+ <body>
+ <h1>URL deleted.</h1>
+ </body>
+ </html>
+```
+* **Phương thức CONNECT**
+ * Sử dụng Client để tạo thành một liên kết với Server qua HTTP.
+ * Ví dụ: Yêu cầu một kết nối với một Server đang chạy trên host *tutorialsponit.com*
+```
+ CONNECT www.tutorialspoint.com HTTP/1.1
+ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+```
+* Kết nối được thành lập với Server và phản hồi sau được gửi trả lại tới Client:
+```
+ HTTP/1.1 200 Connection established
+ Date: Mon, 27 Jul 2009 12:28:53 GMT
+ Server: Apache/2.2.14 (Win32)
+```
+* **Phương thức OPTIONS**
+ * Sử dụng bởi Client để tìm các phương thức HTTP có các chức năng hỗ trợ bởi Server. Client có thể xác định một URL có phương thức Options hoặc một dấu * đẻ hướng dẫn tới toàn bộ Server.
+ * ví dụ: yêu cầu một danh sách, các phương thức hỗ trợ Server chạy trên *tutorialpoint.com*
+```
+ OPTIONS * HTTP/1.1
+ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+```
+* Server sẽ gửi một thông tin dựa trên định cấu hình hiện tại của Server,
+```
+ HTTP/1.1 200 OK
+ Date: Mon, 27 Jul 2009 12:28:53 GMT
+ Server: Apache/2.2.14 (Win32)
+ Allow: GET,HEAD,POST,OPTIONS,TRACE
+ Content-Type: httpd/unix-directory
+```
+* **Phương thức TRACE**
+ * Sử dụng để ánh sạ các nội dung cảu một yêu cầu HTTP tới ng yêu cầu mà có thể sử dụng cho mục đích *debug* tại thời điểm của sự phát triển.
+ * Ví dụ: 
+```
+ TRACE / HTTP/1.1
+ Host: www.tutorialspoint.com
+ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+```
+* Server sẽ gửi thông báo sau trong phản hồi tới yêu cầu trên
+```
+ HTTP/1.1 200 OK
+ Date: Mon, 27 Jul 2009 12:28:53 GMT
+ Server: Apache/2.2.14 (Win32)
+ Connection: close
+ Content-Type: message/http
+ Content-Length: 39
+
+ TRACE / HTTP/1.1
+ Host: www.tutorialspoint.com
+ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+```
 
 <a name="7"></a>
 ## 7. HTTP - Mã hóa trạng thái
