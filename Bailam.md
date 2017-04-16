@@ -215,10 +215,8 @@ ví dụ:
 
 |STT| Phương thức và Miêu tả |
 |---|------------------------|
-|1|**Get**
-      Lấy một tài nguyên hiện có. URL chứa tất cả các thông tin cần thiết mà máy chủ cần để định vị và trả lại tài nguyên|
-|2|**POST** 
-      Tạo một tài nguyên mới. Yêu cầu POST thường mang theo một payload xác định dữ liệu cho tài nguyên mới.|
+|1|**Get**: Lấy một tài nguyên hiện có. URL chứa tất cả các thông tin cần thiết mà máy chủ cần để định vị và trả lại tài nguyên|
+|2|**POST**: Tạo một tài nguyên mới. Yêu cầu POST thường mang theo một payload xác định dữ liệu cho tài nguyên mới.|
 
 
 
