@@ -232,8 +232,7 @@ ví dụ:
 |STT| Phương thức miêu tả |
 |---|---------------------|
 |1| Một dấu * được sử dụng khi một yêu cầu HTTP không áp dụng tới một nguồn cụ thể, nhưng tới chính Server đó. Ví dụ: `OPTIONS * HTTP/1.1`|
-|2| **absoluteURI** được sử dụng khi một yêu cầu HTTP đang được tạo ra cho một suwk ủy nhiệm. Sựu ủy nhiệm được yêu cầu chuyển tới yêu cầu hoạch dịnh vụ từ một cache hiệu lực, và trả lại phản hồi. Ví dụ:
-  |`GET http://www.w3.org/pub/WWW/TheProject.html HTTP/1.1`|
+|2| **absoluteURI** được sử dụng khi một yêu cầu HTTP đang được tạo ra cho một suwk ủy nhiệm. Sựu ủy nhiệm được yêu cầu chuyển tới yêu cầu hoạch dịnh vụ từ một cache hiệu lực, và trả lại phản hồi. Ví dụ:`GET http://www.w3.org/pub/WWW/TheProject.html HTTP/1.1`|
 |3| * Mẫu phổ biến nhất của Request-URI được sử dụng để xác định một nguồn trên một Server hoặc gateway ban đầu.|
 | |* Ví dụ, một Client mong muốn lấy được một nguồn một cách trực tiếp từ Server ban đầu sẽ tạo một kết nối TCP tới port 80 của host `www.w3.org` và gửi các dòng sau:|
 | |```|
