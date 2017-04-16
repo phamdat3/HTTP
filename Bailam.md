@@ -318,6 +318,7 @@ ví dụ:
 ```
 * **Mã hóa trạng thái** 
  * Yếu tố Status-Code là một số nguyên 3 ký tự, trong đó ký tự đầu tiên của mã hóa trạng thái định nghĩa hạng (loại) phản hồi và hai ký tự cuối không có bất cứ vai trò phân loại nào. Có 5 giá trị của ký tự đầu tiên:
+
 |STT| Phương thức miêu tả |
 |---|---------------------|
 |1| **1xx: Thông tin**: Nó nghĩa là yêu cầu đã được nhận và tiến trình đang tiếp tục.|
@@ -423,7 +424,8 @@ ví dụ:
  Content-Length: 88
  Content-Type: text/html
  Connection: Closed
- ---
+```
+```
  <html>
  <body>
  <h1>Hello, World!</h1>
