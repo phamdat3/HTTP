@@ -705,6 +705,7 @@ Server|
 |7|**only-if-cached**: Không lấy dữ liệu mới. Bộ nhớ ẩn có thể gửi một tài liệu chỉ kho nó ở trong bộ nhớ ẩn, và không nên liên hệ với server ban đầu để xem xét nấu một bản sao mới hơn tồn tại|
 
 * Các chỉ dẫn phản hồi bộ nhớ ẩn quan trọng sau đây có thể được sử dụng bởi **Server** trong phản hồi của nó:
+
 |STT| Chỉ dẫn yêu cầu bộ nhớ ẩn và miêu tả |
 |---|--------------------------------------|
 |1|**public**: Chỉ ra rằng phản hồi có thể được giữ trong bộ nhớ ẩn bởi bất cứ bộ nhớ ẩn nào|
