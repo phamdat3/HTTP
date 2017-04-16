@@ -130,6 +130,72 @@ ví dụ:
 
 <a name="3"></a>
 ## 3. HTTP - Thông báo(Message)
+* HTTP được xây dựng trên cơ sở mô hình Client-Server và giao thức Stateless các yêu cầu/phản hồi được trao đổi các thông báo(Message) dọc theo một lết nối TCP/IP
+* Một Client là một chương trình mà thiết lập một kết nối tới một Server cho mục đích gửi một hoặc nhiều thông báo yêu cầu HTTP. Một HTTP Server là một chương trình mà chấp nhận các kết nối để phụ vụ các yêu cầu HTTP bởi việc gửi các thông báo phản hồi HTTP.
+* HTTP sử dụng URI để nhận diện một nguồn đã cho và để thiết lập một kết nối. Một khi một kết nối được thiết lập, các thông báo HTTP được truyền trong một định dạng.ác thông báo này bao gồm các Yêu cầu từ Client tới Server và các Phản hồi từ Server tới Client  mà sẽ theo định dạng sau:
+```
+ HTTP-message   = <Request> | <Response> ; HTTP/1.1 messages
+```
+* Các yêu cầu và phản hồi HTTP sử dụng 1 định dạng thông báo chung của RFC 822 cho chuyền tải dữ liệu đưuọc yêu cầu. Định bạng thông báo chung này gốm 4 phần:
+```
+ Một dòng đầu tiên
+
+ Không hoặc nhiều trường Header theo sau bởi CRLF.
+
+ Một dòng trống (ví dụ: một dòng mà không có gì trước CRLF), chỉ phần cuối của trường Header. 
+
+ Một thân thông báo tùy ý
+
+ ```
+ * Dòng đầu thông báo(Start-line)
+      * Một dòng đầu sẽ có cú pháp chung như sau:
+     ```
+      start-line = Request-Line | Status-Line
+     ```
+      * 
+      * Trong đó **Request-Line** là yêu cầu của client còn **Status-Line** là phản hồi của server. Ví dụ:
+     ```
+      GET /hello.jsp HTTP/1.1     (This is Request-Line sent by the client)
+
+      HTTP/1.1 200 OK             (This is Status-Line sent by the server)
+     ```
+ * Các trường Header
+      * Các trường Header cung cấp thông tin được yêu cầu về yêu cầu hoặc phản hồi, hoặc về đối tượng được gửi trong thân thông báo.
+      * Có 4 kiểu của Header trong các thông báo HTTP:  
+           * Kiểu chung (General-Header): Các trường Header này có khả năng ứng dụng chung cho cả các thông báo yêu cầu và phản hồi.
+           * Kiểu yêu cầu (Request-Header): Các trường Header này chỉ có khả năng áp dụng cho các thông báo yêu cầu.
+           * Kiểu phản hồi (Response-Header): Các trường Header này chỉ có khả năng áp dụng cho các thông báo phản hồi.
+           * Kiểu thực thể (Entity-Header): Các trường này xác định thông tin về thân-thực thể hoặc, nếu không có phần thân nào hiển thị, về nguồn được nhận diện bởi yêu cầu.
+      * Tất cả các header ở trên đều được định dạng chung theo một định dạng chung là tên được theo bởi một dấu ":". Ví dụ:
+     ```
+      message-header = field-name ":" [ field-value ]
+     ```
+      * Một số Header đa dạng:
+     ```
+      User-Agent: curl/7.16.3 libcurl/7.16.3 OpenSSL/0.9.7l zlib/1.2.3
+      Host: www.example.com
+      Accept-Language: en, mi
+      Date: Mon, 27 Jul 2009 12:28:53 GMT
+      Server: Apache
+      Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT
+      ETag: "34aa387-d-1568eb00"
+      Accept-Ranges: bytes
+      Content-Length: 51
+      Vary: Accept-Encoding
+      Content-Type: text/plain
+     ```
+ * Phần thân thông báo
+      * Phần thân thông báo là tùy ý cho một thông báo HTTP nhưng nếu nó là có sẵn, thì khi đó nó được sử dụng để mang phần thân được liên kết với yêu cầu hoặc phản hồi. Nếu phần thân thực thể được liên kết, thì sau đó thường các dòng Content-Type và Content-Length xác định bản chất của phần thân được liên kết.
+      * Một phần thân thông báo là phần mà mang dữ liệu yêu cầu HTTP thực sự (bao gồm dữ liệu mẫu và được tải lên,…) và dữ liệu phản hồi HTTP từ Server (bao gồm các file, ảnh, …). Dưới đây là nội dung đơn giản của một phần thân thông báo:
+     ```
+      <html>
+           <body>
+   
+                <h1>Hello, World!</h1>
+   
+           </body>
+      </html>
+     ```    
 
 <a name="4"></a>
 ## 4. HTTP - Yêu cầu(Request)
