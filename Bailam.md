@@ -609,6 +609,71 @@ ví dụ:
 
 <a name="7"></a>
 ## 7. HTTP - Mã hóa trạng thái
+**1xx: Thông tin**
+
+| Thông báo | Miêu tả |
+|-----------|---------|
+| 100 continue| Chỉ một phần yêu cầu được nhận bởi Server, nhưng miễn là nó không bị loại bỏ, Client nên tiếp tục với yêu cầu|
+| 101 Switching  Protoconl| Server chuyển đổi giao thức|
+
+**2xx: Thành công**
+
+| Thông báo | Miêu tả |
+|-----------|---------|
+| 200 OK | Yêu cầu là OK|
+| 201 Created | Yêu cầu là hoàn thành, và mở nguồn mới được tạo|
+| 202 Acceted | Yêu cầu được chấp nhận cho sử lý, nhưng việc sử lý chưa hườn thành|
+| 203 No-authoritative information| Thông tin trong đôi tượng Header là một bảo sao nội bộ hoặc bên thứ 3 không từ Server ban đầu|
+| 204 No Content| Một mã trạng thái và một Header được cung cấp trong phản hồi, nhưng không có phần thân đối tượng trong sự phản hồi|
+| 205 Reset Content| Trình duyệt nên dọn sạch mẫu được sử dụng cho việc truyền tải bởi một dữ liệu đầu vào tăng thêm|
+| 206 Partial Content | Server đang trả lại dữ liệu cục bộ của kích cỡ được yêu cầu. Server phải sác định dãy được bao gồm trong phản hồi với *content-Range* header.|
+
+**3xx: Sự điều hướng lại**
+
+| Thông báo | Miêu tả |
+|-----------|---------|
+| 300 Multiple choices| Một danh sách các link. Người sử dụng có thể có một link và tới vị trí đó. tối đa 5 địa chỉ|
+| 301 Moved Permanently| Trang được yêu cầu di chuyển tới một URL mới|
+| 302 Found | Trang được yêu cầu di chuyển tam thời đến một URL mới|
+| 303 Sê other| Trang được yêu cầu có thể tìm được dưới một trang URL khác|
+| 304 Not Modified| Đây là mã phẩn hòi tới một *if-modified-since* hoặc *if-none-match* header, nơi mà URL không được chỉnh sửa từ ngày cụ thể|
+| 305 Use proxy | URL được yêu cầu phải truy cập thông qua một sự ủy quyền đưuọc đề cập trong *location* Header.|
+| **306 Unused** | Mã này được sử dụng trong một phiên bản trước. Nó không còn được sử dụng nữa, nhưng mã này vẫn được lưu dữ|
+| 307 Temporary redirect| Trang được yêu cầu đã di chuyển tới một URL mới|
+
+**4xx: Lỗi Client**
+
+| Thông báo | Miêu tả |
+|-----------|---------|
+| 400 bad request | Server không hiểu yêu cầu |
+| 401 unauthorized| Trang yêu cầu cần một tên sử dụng và một mật khẩu|
+| 402 payment required| ** bạn không sử dụng ma này nữa** |
+| 403 Forbidden| Sự truy cập đến trang yêu cầu bị cấm|
+| 404 not found| Server không thể tìm thấy trang được yêu cầu|
+| 405 metod not allowed| Phương thức được xác định trogn yêu cầu là không được phép|
+| 406 not acceptable| Server chỉ có thể tạo một phản hồi mà không ddowcj chấp nhận bởi Client|
+| 407 Proxy authentication required| Bạn phải sác nhận với một server ủy quyền trước khi yêu cầu này được phục vụ|
+| 408 request timeuot| Yêu cầu tốn thời gian nhiều hơn thời gian Server được chuẩn bị để đợi|
+| 409 conflict| Yêu cầu không thể hoàn thành vì sự xung đột|
+| 410 gone| Trang yêu cầu không có sẵn nữa|
+| 411 Length Required|  Content-length không được xác dịnh rõ. Server sẽ không chấp nhận yếu cầu mà không có nó|
+| 412 Precondition Failed| Điều kiện trước được cung cấp trong yêu cầu được tính toán là sai bởi server|
+| 413 Request etity too large| Server không chấp nhận yêu cầu, bưởi vì tượng yêu cầu là quá rộng|
+| 414 Request-url too long| Server không chấp nhận yêu cầu, bởi vì URL quá dài.Xảy ra khi bạn chuyển một yêu cầu "port" tới một yêu cầu Get với thông tin quá dài|
+| 415 Unsupported media tupe| Server không chấp nhận yêu cầu, bởi vì kiểu phương tiện không được hỗ trợ|
+| 416 Requested range not satisfiable| Dãy byte được yêu cầu là không có sẵn và beeb ngoài giới hạn|
+| 417 Expecctation failed| khả năng được cung cấp trong một trường Expect không thể được kết nối bởi Server|
+
+**5xx: Lỗi Server**
+
+| Thông báo | Miêu tả |
+|-----------|---------|
+| 500 internal server error| Yêu cầu không được hoàn thành. Server bắt gặp một điều kienj không được mong đợi|
+| 501 not implemented| Yêu cầu không được hoàn thành. Server hỗ trợ tính năng được yêu cầu|
+| 502 bad gateway| Yêu cầu không được hoàn thành. Server nhận một phản hồi không có hiệu lức từ server ở thượng nguồn|
+| 503 Server unavailable | Yêu cầu không được hoàn thành. Server tạm thời đang quá tải hoặc đang Down|
+| 504 Gateway timeout| Getway bị trễ|
+| 505 HTTP Version not supported| Server không hỗ trợ phiên bản giao thức http|
 
 <a name="8"></a>
 ## 8. HTTP - Các trường Header
