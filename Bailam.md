@@ -199,6 +199,28 @@ ví dụ:
 
 <a name="4"></a>
 ## 4. HTTP - Yêu cầu(Request)
+* Một Client gửi một yêu cầu HTTP tới một Server trong mẫu một thông báo yêu cầu mà bao gồm định dạng sau:
+```
+ Một dòng yêu cầu
+
+ Không hoặc nhiều hơn trường Header (General|Request|Entity) được theo sau bởi CRLF.
+
+ Một dòng trống (ví dụ: một dòng không có gì đằng trước CRLF) chỉ phần kết thúc của trường Header.
+
+ Một phần thân thông báo tùy ý
+```
+* **Dòng yêu cầu:**
+ * Dòng yêu cầu bắt đầu với một thủ tục method, được theo sau bởi một Reqeust-URI đã cung cấp. Method là case-intensive và nên luôn luôn được dề cập trong chữ hoa. 
+ * Bảng sau liệt kê tất cả các Method đưuọc hỗ trợ trong HTTP/1.1
+ |STT| Phương thức và Miêu tả |
+ |---|------------------------|
+ |1|**Get**
+   |  Lấy một tài nguyên hiện có. URL chứa tất cả các thông tin cần thiết mà máy chủ cần để định vị và trả lại tài nguyên|
+ |2|**POST** 
+   |Tạo một tài nguyên mới. Yêu cầu POST thường mang theo một payload xác định dữ liệu cho tài nguyên mới.|
+
+
+
 
 <a name="5"></a>
 ## 5. HTTP - Phản hồi(Response)
