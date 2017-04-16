@@ -242,6 +242,10 @@ ví dụ:
  Host: www.w3.org
 ```
 * Ghi chú rằng, đường truyền tuyệt đối không thể là trống rỗng; nếu không gì được trình bày trong URI ban đầu, nó Phải được cung cấp như là "/" (Server root).|
+|4| |
+
+
+
 <a name="5"></a>
 ## 5. HTTP - Phản hồi(Response)
 
