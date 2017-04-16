@@ -216,7 +216,13 @@ ví dụ:
 |STT| Phương thức và Miêu tả |
 |---|------------------------|
 |1|**Get**: Lấy một tài nguyên hiện có. URL chứa tất cả các thông tin cần thiết mà máy chủ cần để định vị và trả lại tài nguyên|
-|2|**POST**: Tạo một tài nguyên mới. Yêu cầu POST thường mang theo một payload xác định dữ liệu cho tài nguyên mới.|
+|2|**HEAD**: Tương tự như GET, nhưng nó truyền tải dòng trạng thái và khu vực Header.|
+|3|**POST**: Tạo một tài nguyên mới. Yêu cầu POST thường mang theo một payload xác định dữ liệu cho tài nguyên mới.|
+|4|**PUT**: Thay đổi tất cả các đại diện hiện tại của nguồn mục tiêu với nội dung được tải lên.|
+|5|**DELETE**: Gỡ bỏ tất cả các đại diện hiện tại của nguồn mục tiêu bởi URI.|
+|6|**CONNECT**: Thiết lập một tunnel tới Server được xác định bởi URI đã cung cấp.|
+|7|**OPTIONS**: Miêu tả các chức năng giao tiếp cho nguồn mục tiêu.|
+|8|**TRACE**: Trình bày một vòng lặp kiểm tra thông báo song song với path tới nguồn mục tiêu.|
 
 
 
