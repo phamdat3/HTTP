@@ -233,10 +233,66 @@ ví dụ:
 |---|---------------------|
 |1| Một dấu * được sử dụng khi một yêu cầu HTTP không áp dụng tới một nguồn cụ thể, nhưng tới chính Server đó. Ví dụ: `OPTIONS * HTTP/1.1`|
 |2| **absoluteURI** được sử dụng khi một yêu cầu HTTP đang được tạo ra cho một suwk ủy nhiệm. Sựu ủy nhiệm được yêu cầu chuyển tới yêu cầu hoạch dịnh vụ từ một cache hiệu lực, và trả lại phản hồi. Ví dụ:`GET http://www.w3.org/pub/WWW/TheProject.html HTTP/1.1`|
-|3|  Mẫu phổ biến nhất của Request-URI được sử dụng để xác định một nguồn trên một Server hoặc gateway ban đầu. Ví dụ, một Client mong muốn lấy được một nguồn một cách trực tiếp từ Server ban đầu sẽ tạo một kết nối TCP tới port 80 của host `www.w3.org` và gửi các dòng sau:`GET /pub/WWW/TheProject.html HTTP/1.1   Host: www.w3.org`. Ghi chú rằng, đường truyền tuyệt đối không thể là trống rỗng; nếu không gì được trình bày trong URI ban đầu, nó Phải được cung cấp như là "/" (Server root).|
-|4| |
+|3|  Mẫu phổ biến nhất của Request-URI được sử dụng để xác định một nguồn trên một Server hoặc gateway ban đầu. Ví dụ, một Client mong muốn lấy được một nguồn một cách trực tiếp từ Server ban đầu sẽ tạo một kết nối TCP tới port 80 của host `www.w3.org` và gửi các dòng sau:`GET /pub/WWW/TheProject.html HTTP/1.1` và `Host: www.w3.org`. Ghi chú rằng, đường truyền tuyệt đối không thể là trống rỗng; nếu không gì được trình bày trong URI ban đầu, nó Phải được cung cấp như là "/" (Server root).|
 
+* **Các trường Header Yêu cầu**
+ * Các trường Request-Header cho phép Client truyền thông tin thêm về yêu cầu, và về chính client đó tới Server. 
+ * Một số trường Request-Header quan trọng:
+      * Accept-charset 
+      * Accept-Encoding
+      * Accept-Language
+      * Authorization
+      * Expect 
+      * From
+      * Host
+      * If-Match
+      * If-Modified-Since
+      * If-Modified-Since
+      * If-Range
+      * If-Unmodified-Since
+      * Max-Forwards
+      * Proxy-Authorization
+      * Range
+      * Referer
+      * TE
+      * User-Agent
+* **Các ví dụ của Thông báo Yêu cầu**
+  * Tạo một yêu cầu HTTP đến địa chỉ trang **hello.htm** từ Server chạy đến tutorialspoint.com.
+```
+ GET /hello.htm HTTP/1.1
+ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+ Host: www.tutorialspoint.com
+ Accept-Language: en-us
+ Accept-Encoding: gzip, deflate
+ Connection: Keep-Alive
+```
+ * Tại đây chúng ta không gửi bất cứ yêu cầu dữ liệu tới Server bởi vì chúng ta đang chỉ thị một trang thuần HTML từ Server. Kết nối là General-Header, và phần còn lại của Header là các Header yêu cầu. Ví dụ sau đây chỉ cách để gửi dữ liệu mẫu tới Server bởi sử dụng phần thân thông báo yêu cầu:
+```
+ POST /cgi-bin/process.cgi HTTP/1.1
+ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+ Host: www.tutorialspoint.com
+ Content-Type: application/x-www-form-urlencoded
+ Content-Length: length
+ Accept-Language: en-us
+ Accept-Encoding: gzip, deflate
+ Connection: Keep-Alive
+ 
+ licenseID=string&content=string&/paramsXML=string
+```
+ * Ở đây, URl được cung cấp /cgi-bin/process.cgi sẽ được sử dụng để xử lý dữ liệu được truyền và theo đó, một phản hồi sẽ được trả lại. Ở đây content-type nói cho Server rằng dữ liệu được truyền là một dữ liệu mẫu web đơn giản và length sẽ là độ dài thực của dự liệu đặt trong phần thân thông báo. Ví dụ sau chỉ cách bạn có thể truyền XML thuần tới Server của bạn
+```
+ POST /cgi-bin/process.cgi HTTP/1.1
+ User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)
+ Host: www.tutorialspoint.com
+ Content-Type: text/xml; charset=utf-8
+ Content-Length: length
+ Accept-Language: en-us
+ Accept-Encoding: gzip, deflate
+ Connection: Keep-Alive
 
+ <?xml version="1.0" encoding="utf-8"?>
+ <string xmlns="http://clearforest.com/">string</string>
+```
 
 <a name="5"></a>
 ## 5. HTTP - Phản hồi(Response)
