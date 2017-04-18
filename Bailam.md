@@ -719,6 +719,227 @@ Server|
 |9|**s-maxage = giây**: Tuổi tối đa được xác định bởi chỉ dẫn này vượt quá tuổi tối đa đã xác định bởi hoặc chỉ dẫn max-age hoặc Expires Header. Chỉ dẫn s-maxage luôn luôn được bỏ qua bởi một bộ nhớ cá nhân.|
 
 **Trường Connection**
+ * Trường Header chung Connection cho phép người gửi xác định các chức năng mà được mong ước cho kết nối cụ thể đó và phải không được giao tiếp bởi các trạm ủy quyền qua các kết nối xa hơn. 
+ * Cú pháp đơn giản cho sử dụng Connection Hesder.
+ * Cú pháp đơn giản đẻ sử dụng connection header
+```
+ Connection : "Connection"
+```
+* HTTP/1.1 xác định rõ chức năng kết nối **close** cho người gửi tới tín hiệu mà kết nối sẽ được đóng sau khi hoàn thành phản hồi
+```
+ Connection: close
+```
+Theo mặc định, HTTP 1.1 sử dụng các kết nối liên tục, nơi mà kết nối không tự động đóng sau khi hoàn thành một giao dịch. Trong khi đó, HTTP 1.0 không có các kết nối liên tục theo mặc định. Nếu một Client 1.0 mong muốn sử dụng các kết nối liên tục, nó sử dụng các tham số **keep-alvie** như sau:
+```
+ Connection: keep-alive
+```
+
+**Trường Data**
+ * Tất cả các nhãn Ngày/Thời gian PHẢI được biểu diễn trong GMT. Các ứng dụng HTTP được phép sử dụng bất kỳ 3 sự bieur diễn nhãn ngày/ thời gian sau đây.
+```
+ Sun, 06 Nov 1994 08:49:37 GMT  ; RFC 822, updated by RFC 1123
+ Sunday, 06-Nov-94 08:49:37 GMT ; RFC 850, obsoleted by RFC 1036
+ Sun Nov  6 08:49:37 1994       ; ANSI C's asctime() format
+```
+**Trường Pragma**
+ * Dùng để bao gồm các chỉ dẫn cụ thể để thực hiện mà có thể áp dụng tới bất kỳ người nhận nào trong chuỗi yêu cầu/ phản hồi.
+ * Ví dụ:
+```
+ Pragma: no-cache
+```
+**Trường Trailer**
+ * giá trị của trường này chỉ ra rằng thiết lập đã cho của các trường Header biểu diễn trong trailer của một thông báo được mã hóa với mã chuyển tải được đóng khối.
+ * Cú pháp:
+```
+ Trailer : field-name
+```
+ * Các trường Header thông báo được liệt kê trong trường Trailer phải không bao gồm các trường Header sau:
+```
+ Transfer-Encoding
+
+ Content-Length
+
+ Trailer
+```
+**Trường Transfer-Encoding (Mã hóa truyền tải)**
+ * trường này chỉ ra kiểu chuyền tải nào được ấp dụng tơi phần thông báo được an toàn giữa người nhận và người gửi. Không giống như **Content-encoding** bởi vì các mã hóa truyền tải là một thuộc tính của thông báo, không phải là của phần thân thông báo.
+ * Cú pháp:
+```
+ Transfer-Encoding: chunked
+```
+**Trường Upgrade**
+ * Trường Upgrade này cho phép Client xác định những giao thức giao tiếp thêm vào mà nó hỗ trợ và sẽ được sử dụng nếu Server tìm thấy rằng nó thích hợp để chuyển đổi giao thức.
+ * ví dụ:
+```
+ Upgrade: HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11
+```
+**Trường Via**
+ * Trường Via phải được sử dụng bởi các gateway và các trạm ủy nhiệm để chỉ ra các giao thức trung gian và người nhận
+ * Ví dụ, một thông báo yêu cầu có thể được gửi từ một HTTP/1.0 User agent tới một trạm ủy nhiệm nội bộ được đặt tên mã "fred", mà sử dụng HTTP/1.1 để chuyển tiếp yêu cầu tới một trạm ủy nhiệm công cộng tại nowhere.com, mà hoàn thành yêu cầu bởi việc chuyển tiếp nó tới Server ban đầu tại www.ics.uci.edu. Yêu cầu được nhận bởi www.ics.uci.edu sẽ có trường Via như sau:
+```
+ Via: 1.0 fred, 1.1 nowhere.com (Apache/1.1)
+```
+**Trường Warning (Cảnh báo)**
+ * Trường Warning được sử dụng để mang thông tin thêm về trạng thái hoặc sự truyền tải của một thông báo mà có thể không được phản ánh trong thông báo đó. Một sự phản hồi có thể mang nhiều hơn một trường Warning.
+```
+  Warning : warn-code SP warn-agent SP warn-text SP warn-date
+```
+
+### Request-Header (Kiểu yêu cầu)
+* Các trường Hesder này có khả năng áp dụng cho các thông báo yêu cầu. 
+**Trường Accept (Chấp nhận)**
+ * Trường Accept này có thể được sử dụng đễ xác định các kiểu phương tiện cụ thể mà là có thể chấp nhận cho sự phản hồi.
+ * Cú pháp:
+```
+ Accept: type/subtype [q=qvalue]
+```
+ * Các kiểu phương tiện có thể được liệt kê phân biệt nhau bởi các dấu phảy và giá trị q tùy ý biểu diễn một mức độ chất lượng có thể chấp nhận để chấp nhận các kiểu trên một phạm vi từ 0 tới 1.
+```
+Accept: text/plain; q=0.5, text/html, text/x-dvi; q=0.8, text/x-c
+```
+ * Đoạn này có thể được biên dịch như **text/html** và **text/x-c** và là các kiểu phương tiện được ưa thích hơn nhưng nếu chúng không tồn tại, thì sau đó gửi đối tượng **text/x-dvi** , và nếu nó không tồn tại, gửi đối tượng **text/plain**.
+**Trường Accept-charset**
+ * Trường này có thể được sử dụng để chỉ các bộ thiết lập ký tự nào được chấp nhạn cho sự phẩn hồi. 
+ * Cú pháp:
+```
+ Accept-Charset: character_set [q=qvalue]
+``` 
+ * Nhiều bộ ký tự có thể được riêng rẽ nhau bởi các dấu phảy và giá trị **p** tùy ý biểu diễn một mức độ chất lượng có thể chấp nhận cho các bộ ký tự không được ưa thích hơn trên miền từ 0 đến 1.
+```
+ Accept-Charset: iso-8859-5, unicode-1-1; q=0.8
+```
+ * Giá trị "*" trong trường Accept-charset là mặc định bất kỳ ký tự nào cũng được chấp nhận. cho dù trong trường Accept-charset không có giá trị nào.
+**Trường Accept-Encoding**
+ * Trường này tương tự như Accept, nhưng hạn chế mã hóa nội dung là có thể chấp hận trong phản hồi.
+ * Cú pháp:
+```
+ Accept-Encoding: encoding types
+```
+ * Ví dụ:
+```
+ Accept-Encoding: compress, gzip
+ Accept-Encoding:
+ Accept-Encoding: *
+ Accept-Encoding: compress;q=0.5, gzip;q=1.0
+ Accept-Encoding: gzip;q=1.0, identity; q=0.5, *;q=0
+```
+**Trường Accept-Language**
+ * Trường này tương tự như Accept, nhưng hạn chế bố thiết lập các ngôn ngữ tự nhiên là được ưa thích hơn khi một phản hồi tới một yêu cầu.
+ * Cú pháp:
+```
+Accept-Language: language [q=qvalue]
+```
+ * Các ngôn ngữ có thể phân biệt nhau bởi dấu chấm phẩy và giá trị **q** tùy ý theo mức độ chất lượng các ngôn ngữ không được ưa thích hơn trên miền 0 đến 1.
+```
+ Accept-Language: da, en-gb;q=0.8, en;q=0.7
+```
+**Trường Authorization(sử ủy quyền)**
+ * Giá trị trương này bao gồm các sự ủy nhiệm mà chứa thông tin ủy quyền chủa một use agent cho phạm vi nguồn đang được yêu cầu.
+ * cú pháp:
+```
+ Authorization : credentials
+```
+ * Giản đồ ủy quyền cơ bản (HTTP/1.0), tham số ủy quyền là một chuỗi của **tên sử dụng:mật khẩu** được mã hóa trong cơ sở 64 bit.
+```
+ Authorization: BASIC Z3Vlc3Q6Z3Vlc3QxMjM=
+```
+ * Giá trị trả về là: **guest:gusest123**, trong đó **guest** là tên tài khoản, **geust** là mật khẩu
+**Trường Cookie**
+ * Trường này chứa giá trị tên/giá trị của thông tin được lưu trong URL đó. 
+ * Cú pháp:
+```
+ Cookie: name=value
+```
+ * Với nhiều Cookie thì chúng được phân cách nhau bởi dấu ";".
+```
+ Cookie: name1=value1;name2=value2;name3=value3
+```
+**Trường Expect**
+ *  Trường này được sử dụng để chỉ ra rằng một bộ hành vi của Server được yêu cầu bởi Client
+ * Cú pháp:
+```
+ Expect : 100-continue | expectation-extension
+``` 
+ * Nếu Server nhận được một yêu cầu mà trường Expect mà độ dãn không được hỗ trợ thì nó sẽ phẩn hồi với trạng thái 417 (sự mong đợi thất bại)
+**Trường From**
+ * Trường chứa địa chỉ thư điện tử để kiểm soát user agent.
+ * Cú pháp:
+```
+ From: webmaster@w3.org
+```
+**Trường Host**
+ * Xác định Unternet host và số hiệu cổng cảu nguồn được yêu cầu.
+ * Cú pháp:
+```
+ Host : "Host" ":" host [ ":" port ] ;
+```
+ * Một host không có bất kỳ thông tin nào về port nào thì ngụ ý là port 80. hay port 80 là bort mặc định.
+ * Ví dụ: yêu câu trên Server ban đầu là *http://w3.org/pub/WWW/*
+```
+ GET /pub/WWW/ HTTP/1.1
+ Host: www.w3.org
+```
+**Trường If-Match** 
+ * Trường if-match được sử dụng trong method đẻ làm điều kiện. Header này yêu cầu Server để biểu diễn method được yêu cầu chỉ khi giá trị được cung cấp trong thẻ này kết nối với thẻ đối tượng được cung cấp được biểu diễn bởi Etag.
+```
+ If-Match : entity-tag
+```
+ * Một dấu "*" kết nói với bất cứ đối tượng nào. hay ns cách khác thì mọi đối tượng đều được kết nối.
+```
+ If-Match: "xyzzy"
+ If-Match: "xyzzy", "r2d2xxxx", "c3piozzzz"
+ If-Match: *
+```
+ * Trường hợp nếu không có đối tượng nào kết nối, không có đối tượng nào hiện tại tồn tại thì server không được trình bày methor được yêu cầu và trả lại ohanr hồi 412(điều kiên trước thất bại)
+**Trường  If-Modified-Since**
+ * Trường này được sử dụng với một method để làm cho nó có điều kiện. Nếu URL được yêu cầu không đưuọc chỉnh sửa từ thời gian đã được xác định trong trường này, một đối tượng sẽ không đưuọc trả lại từ server thay vào đó một phản hồi 304(khong được chỉnh sửa) được trả lại và không có thêm thông báo nào. 
+ * Cú pháp:
+```
+ If-Modified-Since : HTTP-date
+```
+```
+ If-Modified-Since: Sat, 29 Oct 1994 19:43:31 GMT
+```
+ If-Modified-Since: Sat, 29 Oct 1994 19:43:31 GMT
+```
+ * Nếu không có thẻ đối tượng nào kết nối hoặc không đối tượng hiện tại nào tôn tại thì  Server phản hồi lại  412(điều kiện trước thất bại)
+**Trường If-None-Match**
+ * **Tương tự trường  If-Match**
+**Trường If-Range**
+ * Trương Trường If-Range sử dụng 1 yêu cầu có điều kiện để chỉ một phần đối tượng nếu nó bị thất lạc hoặc toàn bộ đối tượng nếu nó được thay đổi.
+ * Cú pháp:
+```
+ If-Range : entity-tag | HTTP-date
+```
+ * Để sác minh đối tượng nội bộ đã nhận một thẻ đói tượng hoặc một dữ liệu.
+```
+ If-Range: Sat, 29 Oct 1994 19:43:31 GMT
+```
+ * Tại đây, nếu tài liệu không được chỉnh sửa từ ngày đã cho, Server trả lại dãy byte được cung cấp bởi trường Range, nếu không thì nó trả lại tất cả các tài liệu mới
+**Trường If-Unmodified-Since**
+ * Trương này được sử dụng với một phương pháp để làm cho nó có điều kiện.
+ * Cú pháp:
+```
+If-Unmodified-Since : HTTP-date
+```
+ * Nếu nguồn được yêu cầu không được chỉnh sửa từ khi thời gian đã được xác định trong trường này, Server sẻ thực hiện hoạt động được yêu cầu nếu như If-Unmodified-Since không biểu diễn
+```
+ If-Unmodified-Since: Sat, 29 Oct 1994 19:43:31 GMT
+```
+ * Nếu yêu cầu có kết quả là bất cứ gì khác ngoài một trạng thái là 2xx hoặc 4xx, thì trường If-Unmodified-Since nên được bỏ qua.
+**Trường Max-Forwards**
+
+
+
+
+
+### Response-Header (Kiểu phản hồi)
+* Các trường header này chỉ có khả năng áp dụng cho các thông báo phản hồi.
+
+
+### Entity_Header (Kiểu thực thể)
+* CÁc trường này xác định thông tin về thân-thực thể hoặc, nếu không có phần thân nào hiển thị, về nguồn được nhận diện bởi yêu cầu. 
+
 <a name="9"></a>
 ## 9. HTTP - Caching
 
