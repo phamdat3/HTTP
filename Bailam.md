@@ -809,6 +809,7 @@ Accept: text/plain; q=0.5, text/html, text/x-dvi; q=0.8, text/x-c
  Accept-Charset: iso-8859-5, unicode-1-1; q=0.8
 ```
  * Giá trị "*" trong trường Accept-charset là mặc định bất kỳ ký tự nào cũng được chấp nhận. cho dù trong trường Accept-charset không có giá trị nào.
+
 **Trường Accept-Encoding**
  * Trường này tương tự như Accept, nhưng hạn chế mã hóa nội dung là có thể chấp hận trong phản hồi.
  * Cú pháp:
@@ -891,6 +892,7 @@ Accept-Language: language [q=qvalue]
  If-Match: *
 ```
  * Trường hợp nếu không có đối tượng nào kết nối, không có đối tượng nào hiện tại tồn tại thì server không được trình bày methor được yêu cầu và trả lại ohanr hồi 412(điều kiên trước thất bại)
+
 **Trường  If-Modified-Since**
  * Trường này được sử dụng với một method để làm cho nó có điều kiện. Nếu URL được yêu cầu không đưuọc chỉnh sửa từ thời gian đã được xác định trong trường này, một đối tượng sẽ không đưuọc trả lại từ server thay vào đó một phản hồi 304(khong được chỉnh sửa) được trả lại và không có thêm thông báo nào. 
  * Cú pháp:
@@ -900,9 +902,8 @@ Accept-Language: language [q=qvalue]
 ```
  If-Modified-Since: Sat, 29 Oct 1994 19:43:31 GMT
 ```
- If-Modified-Since: Sat, 29 Oct 1994 19:43:31 GMT
-```
  * Nếu không có thẻ đối tượng nào kết nối hoặc không đối tượng hiện tại nào tôn tại thì  Server phản hồi lại  412(điều kiện trước thất bại)
+
 **Trường If-None-Match**
  * **Tương tự trường  If-Match**
 **Trường If-Range**
@@ -927,6 +928,7 @@ If-Unmodified-Since : HTTP-date
  If-Unmodified-Since: Sat, 29 Oct 1994 19:43:31 GMT
 ```
  * Nếu yêu cầu có kết quả là bất cứ gì khác ngoài một trạng thái là 2xx hoặc 4xx, thì trường If-Unmodified-Since nên được bỏ qua.
+ 
 **Trường Max-Forwards**
 
 
